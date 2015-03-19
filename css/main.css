@@ -30,9 +30,39 @@ html, body {
 }
 
 #main {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-align-items: stretch;
+    align-items: stretch;
+    -webkit-align-content: stretch;
+    align-content: stretch;
     -webkit-flex-basis: 70%;
     flex-basis: 70%;
-    background-color: red;
+}
+
+#main-graph {
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+    -webkit-flex-shrink: 1;
+    flex-shrink: 1;
+    -webkit-flex-basis: 310px;
+    flex-basis: 310px;
+    background-color: black;
+    color: white;
+}
+
+#main-commands {
+    -webkit-flex-grow: 0;
+    flex-grow: 0;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
+    -webkit-flex-basis: 50px;
+    flex-basis: 50px;
+    background-color: brown;
 }
 
 #toolbox {
@@ -48,7 +78,6 @@ html, body {
     align-content: stretch;
     -webkit-flex-basis: 30%;
     flex-basis: 30%;
-    background-color: blue;
 }
 
 #toolbox-title, #toolbox-settings {
