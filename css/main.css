@@ -206,6 +206,7 @@ html, body {
     height: 100px;
     box-sizing: border-box;
     margin-bottom: 10px;
+    cursor: copy;
     border: 1px solid black;
 }
 

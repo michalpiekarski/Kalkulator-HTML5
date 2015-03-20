@@ -18,8 +18,9 @@ function addToGraph(node) {
     newNode.style.left = (25*numberOfPlacedNodes).toString()+"px";
     newNode.setAttribute("draggable", "true");
     newNode.addEventListener("dragstart", function(event) {
-        var clone = this.cloneNode(false);
+        var clone = this.cloneNode(true);
         clone.style.visibility = "hidden";
+        clone.style.overflow = "hidden";
         clone.id ="clone-node";
         this.appendChild(clone);
         event.dataTransfer.setDragImage(clone,0,0);
