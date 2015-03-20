@@ -20,6 +20,18 @@ function addToGraph(node) {
     graph.appendChild(newNode);
 }
 
+function clearGraph() {
+    var graph = document.getElementById("main-graph");
+    var nodes = graph.getElementsByClassName("main-graph-node");
+    var nodesNum = nodes.length;
+    if(nodesNum > 0) {
+        for(var i=0; i<nodesNum; i++) {
+            graph.removeChild(nodes[0]);
+        }
+    }
+    numberOfPlacedNodes = 0;
+}
+
 var numberOfPlacedNodes = 0;
 
 var nodes = document.getElementsByClassName("toolbox-tool");
