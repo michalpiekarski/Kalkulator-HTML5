@@ -51,8 +51,20 @@ html, body {
     flex-shrink: 1;
     -webkit-flex-basis: 310px;
     flex-basis: 310px;
+    position: relative;
+    top: 0;
+    left: 0;
     background-color: black;
     color: white;
+}
+
+.main-graph-node {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid white;
 }
 
 #main-commands {
