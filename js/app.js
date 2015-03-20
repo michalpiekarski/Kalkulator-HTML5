@@ -12,12 +12,32 @@ function addToGraph(node) {
     var newNode = document.createElement("div");
     newNode.innerHTML = node.innerHTML;
     newNode.setAttribute("class", "main-graph-node");
-    newNode.setAttribute("draggable", "true");
+    newNode.id = "node"+numberOfPlacedNodes;
     numberOfPlacedNodes++;
     newNode.style.top = (25*numberOfPlacedNodes).toString()+"px";
     newNode.style.left = (25*numberOfPlacedNodes).toString()+"px";
+    newNode.setAttribute("draggable", "true");
+    newNode.addEventListener('dragstart', function(event){
+        moveNode(event);
+    });
+    newNode.addEventListener('drag', function(event) {
+        this.innerHTML = this.id + "<br/>" + event.clientX + ", " + event.clientY;
+    })
+    
     var graph = document.getElementById("main-graph");
     graph.appendChild(newNode);
+}
+
+function moveNode(e) {
+    e.stopPropagation();
+    e.dataTransfer.setData("nodeID", e.currentTarget.id);
+}
+
+function placeNode(e) {
+    e.preventDefault();
+    var node = document.getElementById(e.dataTransfer.getData("nodeID"));
+    node.style.left = (e.clientX-node.offsetWidth/2).toString() + "px";
+    node.style.top = (e.clientY-node.offsetHeight/2).toString() + "px";
 }
 
 function clearGraph() {
@@ -33,6 +53,14 @@ function clearGraph() {
 }
 
 var numberOfPlacedNodes = 0;
+
+var graph = document.getElementById("main-graph");
+graph.addEventListener('dragover', function(event){
+    event.preventDefault();
+});
+graph.addEventListener('drop', function(event) {
+    placeNode(event);
+});
 
 var nodes = document.getElementsByClassName("toolbox-tool");
 for(var i=0; i<nodes.length; i++) {
