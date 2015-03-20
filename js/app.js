@@ -24,12 +24,13 @@ function addToGraph(node) {
         clone.id ="clone-node";
         this.appendChild(clone);
         event.dataTransfer.setDragImage(clone,0,0);
+        event.dataTransfer.setData("text/plain","głupi firefox");
     });
     newNode.addEventListener('drag', function(event) {
         event.preventDefault();
-        this.style.top = (event.clientY-this.offsetHeight/2).toString() + "px";
-        this.style.left = (event.clientX-this.offsetWidth/2).toString() + "px";
-        this.innerHTML = this.id + "<br/>" + event.clientX + ", " + event.clientY;
+        this.style.top = (cursorPos.y-this.offsetHeight/2).toString() + "px";
+        this.style.left = (cursorPos.x-this.offsetWidth/2).toString() + "px";
+        this.innerHTML = this.id + "<br/>" + cursorPos.x + ", " + cursorPos.y;
     });
     newNode.addEventListener("dragend", function(event) {
        var clone = this.getElementById("clone-node");
@@ -53,10 +54,16 @@ function clearGraph() {
 }
 
 var numberOfPlacedNodes = 0;
+var cursorPos = {
+    x: 0,
+    y: 0
+};
 
 var graph = document.getElementById("main-graph");
 graph.addEventListener('dragover', function(event){
     event.preventDefault();
+    cursorPos.x = event.clientX;
+    cursorPos.y = event.clientY;
 });
 graph.addEventListener('drop', function(event) {
     event.preventDefault();
