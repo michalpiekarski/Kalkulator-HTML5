@@ -56,6 +56,7 @@ html, body {
     left: 0;
     background-color: black;
     color: white;
+    overflow: scroll;
 }
 
 .main-graph-node {
@@ -64,6 +65,7 @@ html, body {
     position: absolute;
     top: 0;
     left: 0;
+    cursor: move;
     border: 1px solid white;
 }
 

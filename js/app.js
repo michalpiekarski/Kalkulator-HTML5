@@ -17,27 +17,26 @@ function addToGraph(node) {
     newNode.style.top = (25*numberOfPlacedNodes).toString()+"px";
     newNode.style.left = (25*numberOfPlacedNodes).toString()+"px";
     newNode.setAttribute("draggable", "true");
-    newNode.addEventListener('dragstart', function(event){
-        moveNode(event);
+    newNode.addEventListener("dragstart", function(event) {
+        var clone = this.cloneNode(false);
+        clone.style.visibility = "hidden";
+        clone.id ="clone-node";
+        this.appendChild(clone);
+        event.dataTransfer.setDragImage(clone,0,0);
     });
     newNode.addEventListener('drag', function(event) {
+        event.preventDefault();
+        this.style.top = (event.clientY-this.offsetHeight/2).toString() + "px";
+        this.style.left = (event.clientX-this.offsetWidth/2).toString() + "px";
         this.innerHTML = this.id + "<br/>" + event.clientX + ", " + event.clientY;
-    })
+    });
+    newNode.addEventListener("dragend", function(event) {
+       var clone = this.getElementById("clone-node");
+       this.removeChild(clone);
+    });
     
     var graph = document.getElementById("main-graph");
     graph.appendChild(newNode);
-}
-
-function moveNode(e) {
-    e.stopPropagation();
-    e.dataTransfer.setData("nodeID", e.currentTarget.id);
-}
-
-function placeNode(e) {
-    e.preventDefault();
-    var node = document.getElementById(e.dataTransfer.getData("nodeID"));
-    node.style.left = (e.clientX-node.offsetWidth/2).toString() + "px";
-    node.style.top = (e.clientY-node.offsetHeight/2).toString() + "px";
 }
 
 function clearGraph() {
@@ -59,7 +58,7 @@ graph.addEventListener('dragover', function(event){
     event.preventDefault();
 });
 graph.addEventListener('drop', function(event) {
-    placeNode(event);
+    event.preventDefault();
 });
 
 var nodes = document.getElementsByClassName("toolbox-tool");
