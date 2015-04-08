@@ -3,7 +3,7 @@ function toggleToolsCategory(category) {
         category.removeAttribute("hidden");
         event.currentTarget.style.cursor = "n-resize";
     } else {
-        category.setAttribute("hidden");
+        category.setAttribute("hidden", "hidden");
         event.currentTarget.style.cursor = "s-resize";
     }
 }
