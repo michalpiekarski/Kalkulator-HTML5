@@ -1,4 +1,4 @@
-function toggleToolsCategory(category) {
+function toggleToolsCategory(category, event) {
     if(category.hasAttribute("hidden")) {
         category.removeAttribute("hidden");
         event.currentTarget.style.cursor = "n-resize";
@@ -35,7 +35,7 @@ function addToGraph(node) {
     newNode.setAttribute("class", "main-graph-node");
     newNode.id = "node"+numberOfPlacedNodes;
     numberOfPlacedNodes++;
-    newNode.innerHTML = node.innerHTML + "<br/>" + newNode.id + " <a href='#' onClick='deleteNode(this.parentElement)'>X</a>";
+    newNode.innerHTML = node.innerHTML + "<br/>" + newNode.id + " <a href='#' onClick='deleteNode(this.parentElement)'>X</a>"+templates[node.dataset.template].join("\n");
     newNode.style.top = (25*numberOfPlacedNodes).toString()+"px";
     newNode.style.left = (25*numberOfPlacedNodes).toString()+"px";
     newNode.setAttribute("draggable", "true");
@@ -107,7 +107,7 @@ for(var i=0; i<nodes.length; i++) {
 
 var ttct = document.getElementsByClassName("toolbox-tools-category-title");
 for(var i=0; i<ttct.length; i++) {
-    ttct[i].addEventListener("click", function() {
-        toggleToolsCategory(this.nextElementSibling);
+    ttct[i].addEventListener("click", function(event) {
+        toggleToolsCategory(this.nextElementSibling, event);
     });
 }
