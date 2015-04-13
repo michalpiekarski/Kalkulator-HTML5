@@ -35,7 +35,7 @@ function addToGraph(node) {
     newNode.setAttribute("class", "main-graph-node");
     newNode.id = "node"+numberOfPlacedNodes;
     numberOfPlacedNodes++;
-    newNode.innerHTML = node.innerHTML + "<br/>" + newNode.id;
+    newNode.innerHTML = node.innerHTML + "<br/>" + newNode.id + templates[node.dataset.template].html.join("\n");
     newNode.style.top = (25*numberOfPlacedNodes).toString()+"px";
     newNode.style.left = (25*numberOfPlacedNodes).toString()+"px";
     newNode.setAttribute("draggable", "true");
