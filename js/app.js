@@ -8,6 +8,28 @@ function toggleToolsCategory(category) {
     }
 }
 
+function nodeDragStart(event) {
+    var clone = event.target.cloneNode(true);
+    clone.style.visibility = "hidden";
+    clone.style.overflow = "hidden";
+    clone.id ="clone-node";
+    event.target.appendChild(clone);
+    event.dataTransfer.setDragImage(clone,0,0);
+    event.dataTransfer.setData("text/plain","głupi firefox");
+}
+
+function nodeDrag(event) {
+    event.preventDefault();
+    this.style.top = (cursorPos.y-this.offsetHeight/2).toString() + "px";
+    this.style.left = (cursorPos.x-this.offsetWidth/2).toString() + "px";
+    // this.innerHTML = this.id + "<br/>" + cursorPos.x + ", " + cursorPos.y;
+}
+
+function nodeDragEnd(event) {
+   var clone = document.getElementById("clone-node");
+   event.target.removeChild(clone);
+}
+
 function addToGraph(node) {
     var newNode = document.createElement("div");
     newNode.setAttribute("class", "main-graph-node");
@@ -17,25 +39,9 @@ function addToGraph(node) {
     newNode.style.top = (25*numberOfPlacedNodes).toString()+"px";
     newNode.style.left = (25*numberOfPlacedNodes).toString()+"px";
     newNode.setAttribute("draggable", "true");
-    newNode.addEventListener("dragstart", function(event) {
-        var clone = this.cloneNode(true);
-        clone.style.visibility = "hidden";
-        clone.style.overflow = "hidden";
-        clone.id ="clone-node";
-        this.appendChild(clone);
-        event.dataTransfer.setDragImage(clone,0,0);
-        event.dataTransfer.setData("text/plain","głupi firefox");
-    });
-    newNode.addEventListener('drag', function(event) {
-        event.preventDefault();
-        this.style.top = (cursorPos.y-this.offsetHeight/2).toString() + "px";
-        this.style.left = (cursorPos.x-this.offsetWidth/2).toString() + "px";
-        // this.innerHTML = this.id + "<br/>" + cursorPos.x + ", " + cursorPos.y;
-    });
-    newNode.addEventListener("dragend", function(event) {
-       var clone = this.getElementById("clone-node");
-       this.removeChild(clone);
-    });
+    newNode.addEventListener("dragstart", nodeDragStart);
+    newNode.addEventListener('drag', nodeDrag);
+    newNode.addEventListener("dragend", nodeDragEnd);
     
     var graph = document.getElementById("main-graph");
     graph.appendChild(newNode);
@@ -47,6 +53,9 @@ function clearGraph() {
     var nodesNum = nodes.length;
     if(nodesNum > 0) {
         for(var i=0; i<nodesNum; i++) {
+            nodes[0].removeEventListener("dragstart", nodeDragStart);
+            nodes[0].removeEventListener("drag", nodeDrag);
+            nodes[0].removeEventListener("dragend", nodeDragEnd);
             graph.removeChild(nodes[0]);
         }
     }
