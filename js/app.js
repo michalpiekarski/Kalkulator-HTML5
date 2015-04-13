@@ -1,4 +1,4 @@
-function toggleToolsCategory(category) {
+function toggleToolsCategory(category, event) {
     if(category.hasAttribute("hidden")) {
         category.removeAttribute("hidden");
         event.currentTarget.style.cursor = "n-resize";
@@ -87,7 +87,7 @@ for(var i=0; i<nodes.length; i++) {
 
 var ttct = document.getElementsByClassName("toolbox-tools-category-title");
 for(var i=0; i<ttct.length; i++) {
-    ttct[i].addEventListener("click", function() {
-        toggleToolsCategory(this.nextElementSibling);
+    ttct[i].addEventListener("click", function(event) {
+        toggleToolsCategory(this.nextElementSibling, event);
     });
 }
