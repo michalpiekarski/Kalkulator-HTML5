@@ -1,104 +1,24 @@
+var inputPin = "<div class='pin input-pin'></div>";
+var outputPin = "<div class='pin output-pin'></div>";
+var inputNumberXWithLabel = "<label>X<input type='number' /></label>";
+var inputNumberYWithLabel = "<label>Y<input type='number' /></label>";
 var  templates = {
-    "dodawanie" : {
-        "html": ["<div class='input-pin'></div>",
-                "<label>X<input type='number' /></label>",
-                "<div class='input-pin'></div>",
-                "<label>Y<input type='number' /></label>",
-                "<div class='output-pin'></div>"]
-    },
-    "odejmowanie" : {
-        "html": ["<div class='input-pin'></div>",
-                "<label>X<input type='number' /></label>",
-                "<div class='input-pin'></div>",
-                "<label>Y<input type='number' /></label>",
-                "<div class='output-pin'></div>"]
-    },
-    "mnozenie" : {
-        "html": ["<div class='input-pin'></div>",
-                "<label>X<input type='number' /></label>",
-                "<div class='input-pin'></div>",
-                "<label>Y<input type='number' /></label>",
-                "<div class='output-pin'></div>"]
-    },
-    "dzielenie" : {
-        "html": ["<div class='input-pin'></div>",
-                "<label>X<input type='number' /></label>",
-                "<div class='input-pin'></div>",
-                "<label>Y<input type='number' /></label>",
-                "<div class='output-pin'></div>"]
-    },
-    "negacja" : {
-        "html": ["<div class='input-pin'></div>",
-                "<label>X<input type='number' /></label>",
-                "<div class='output-pin'></div>"]
-    },
-    "potegowanie" : {
-        "html": ["<div class='input-pin'></div>",
-                "<label>X<input type='number' /></label>",
-                "<div class='input-pin'></div>",
-                "<label>Y<input type='number' /></label>",
-                "<div class='output-pin'></div>"]
-    },
-    "pierwiastkowanie" : {
-        "html": ["<div class='input-pin'></div>",
-                "<label>X<input type='number' /></label>",
-                "<div class='input-pin'></div>",
-                "<label>Y<input type='number' /></label>",
-                "<div class='output-pin'></div>"]
-    },
-    "logarytm" : {
-        "html": ["<div class='input-pin'></div>",
-                "<label>X<input type='number' /></label>",
-                "<div class='input-pin'></div>",
-                "<label>Y<input type='number' /></label>",
-                "<div class='output-pin'></div>"]
-    },
-    "silnia" : {
-        "html": ["<div class='input-pin'></div>",
-                "<label>X<input type='number' /></label>",
-                "<div class='output-pin'></div>"]
-    },
-    "modulo" : {
-        "html": ["<div class='input-pin'></div>",
-                "<label>X<input type='number' /></label>",
-                "<div class='input-pin'></div>",
-                "<label>Y<input type='number' /></label>",
-                "<div class='output-pin'></div>"]
-    },
-    "sinus" : {
-        "html": ["<div class='input-pin'></div>",
-                "<label>X<input type='number' /></label>",
-                "<div class='output-pin'></div>"]
-    },
-    "cosinus" : {
-        "html": ["<div class='input-pin'></div>",
-                "<label>X<input type='number' /></label>",
-                "<div class='output-pin'></div>"]
-    },
-    "tangens" : {
-        "html": ["<div class='input-pin'></div>",
-                "<label>X<input type='number' /></label>",
-                "<div class='output-pin'></div>"]
-    },
-    "cotangens" : {
-        "html": ["<div class='input-pin'></div>",
-                "<label>X<input type='number' /></label>",
-                "<div class='output-pin'></div>"]
-    },
-    "secans" : {
-        "html": ["<div class='input-pin'></div>",
-                "<label>X<input type='number' /></label>",
-                "<div class='output-pin'></div>"]
-    },
-    "cosecans" : {
-        "html": ["<div class='input-pin'></div>",
-                "<label>X<input type='number' /></label>",
-                "<div class='output-pin'></div>"]
-    },
-    "stala_pi" : {
-        "html": ["<div class='output-pin'></div>"]
-    },
-    "stala_epsilon" : {
-        "html": ["<div class='output-pin'></div>"]
-    }
+    "dodawanie" : [inputPin, inputNumberXWithLabel, inputPin, inputNumberYWithLabel, outputPin],
+    "odejmowanie" : [inputPin, inputNumberXWithLabel, inputPin, inputNumberYWithLabel, outputPin],
+    "mnozenie" : [inputPin, inputNumberXWithLabel, inputPin, inputNumberYWithLabel, outputPin],
+    "dzielenie" : [inputPin, inputNumberXWithLabel, inputPin, inputNumberYWithLabel, outputPin],
+    "negacja" : [inputPin, inputNumberXWithLabel, outputPin],
+    "potegowanie" : [inputPin, inputNumberXWithLabel, inputPin, inputNumberYWithLabel, outputPin],
+    "pierwiastkowanie" : [inputPin, inputNumberXWithLabel, inputPin, inputNumberYWithLabel, outputPin],
+    "logarytm" : [inputPin, inputNumberXWithLabel, inputPin, inputNumberYWithLabel, outputPin],
+    "silnia" : [inputPin, inputNumberXWithLabel, outputPin],
+    "modulo" : [inputPin, inputNumberXWithLabel, inputPin, inputNumberYWithLabel, outputPin],
+    "sinus" : [inputPin, inputNumberXWithLabel, outputPin],
+    "cosinus" : [inputPin, inputNumberXWithLabel, outputPin],
+    "tangens" : [inputPin, inputNumberXWithLabel, outputPin],
+    "cotangens" : [inputPin, inputNumberXWithLabel, outputPin],
+    "secans" : [inputPin, inputNumberXWithLabel, outputPin],
+    "cosecans" : [inputPin, inputNumberXWithLabel, outputPin],
+    "stala_pi" : [outputPin],
+    "stala_epsilon" : [outputPin]
 };
