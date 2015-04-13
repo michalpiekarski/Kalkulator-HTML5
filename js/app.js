@@ -40,7 +40,7 @@ function addToGraph(node) {
     newNode.setAttribute("class", "main-graph-node");
     newNode.id = "node"+numberOfPlacedNodes;
     numberOfPlacedNodes++;
-    newNode.innerHTML = node.innerHTML + "<br/>" + newNode.id + " <a href='#' onClick='deleteNode(this.parentElement)'>X</a>"+templates[node.dataset.template].join("\n")+"<a href='#' class='drag-handle'>MOVE</a>";
+    newNode.innerHTML = node.innerHTML + "<br/>" + newNode.id +templates[node.dataset.template].join("\n");
     newNode.style.top = (25*numberOfPlacedNodes).toString()+"px";
     newNode.style.left = (25*numberOfPlacedNodes).toString()+"px";
     newNode.setAttribute("draggable", "true");
