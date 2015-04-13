@@ -9,13 +9,16 @@ function toggleToolsCategory(category, event) {
 }
 
 function nodeDragStart(event) {
-    var clone = event.target.cloneNode(true);
-    clone.style.visibility = "hidden";
-    clone.style.overflow = "hidden";
-    clone.id ="clone-node";
-    event.target.appendChild(clone);
-    event.dataTransfer.setDragImage(clone,0,0);
-    event.dataTransfer.setData("text/plain","głupi firefox");
+    console.log(event.target);
+    if(event.target.getAttribute("class") === "drag-handle") {
+        var clone = event.currentTarget.cloneNode(true);
+        clone.style.visibility = "hidden";
+        clone.style.overflow = "hidden";
+        clone.id ="clone-node";
+        event.target.appendChild(clone);
+        event.dataTransfer.setDragImage(clone,0,0);
+        event.dataTransfer.setData("text/plain","głupi firefox");
+    }
 }
 
 function nodeDrag(event) {
@@ -35,7 +38,7 @@ function addToGraph(node) {
     newNode.setAttribute("class", "main-graph-node");
     newNode.id = "node"+numberOfPlacedNodes;
     numberOfPlacedNodes++;
-    newNode.innerHTML = node.innerHTML + "<br/>" + newNode.id + " <a href='#' onClick='deleteNode(this.parentElement)'>X</a>"+templates[node.dataset.template].join("\n");
+    newNode.innerHTML = node.innerHTML + "<br/>" + newNode.id + " <a href='#' onClick='deleteNode(this.parentElement)'>X</a>"+templates[node.dataset.template].join("\n")+"<a href='# class='drag-handle'>MOVE</a>";
     newNode.style.top = (25*numberOfPlacedNodes).toString()+"px";
     newNode.style.left = (25*numberOfPlacedNodes).toString()+"px";
     newNode.setAttribute("draggable", "true");
