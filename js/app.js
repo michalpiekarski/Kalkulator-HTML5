@@ -35,14 +35,13 @@ function addToGraph(node) {
     newNode.setAttribute("class", "main-graph-node");
     newNode.id = "node"+numberOfPlacedNodes;
     numberOfPlacedNodes++;
-    newNode.innerHTML = node.innerHTML + "<br/>" + newNode.id;
+    newNode.innerHTML = node.innerHTML + "<br/>" + newNode.id + " <a href='#' onClick='deleteNode(this.parentElement)'>X</a>";
     newNode.style.top = (25*numberOfPlacedNodes).toString()+"px";
     newNode.style.left = (25*numberOfPlacedNodes).toString()+"px";
     newNode.setAttribute("draggable", "true");
     newNode.addEventListener("dragstart", nodeDragStart);
     newNode.addEventListener('drag', nodeDrag);
     newNode.addEventListener("dragend", nodeDragEnd);
-    
     var graph = document.getElementById("main-graph");
     graph.appendChild(newNode);
 }
@@ -61,6 +60,27 @@ function clearGraph() {
     }
     numberOfPlacedNodes = 0;
 }
+
+function deleteNode(node){
+     
+    var graph = document.getElementById("main-graph");
+    var allnodes = graph.getElementsByClassName("main-graph-node");
+    var nodesNum = allnodes.length;
+    node.removeEventListener("dragstart", nodeDragStart);
+    node.removeEventListener("drag", nodeDrag);
+    node.removeEventListener("dragend", nodeDragEnd);
+    var index = parseInt(node.id.substr(4));
+    graph.removeChild(node);
+    numberOfPlacedNodes--;
+    if(numberOfPlacedNodes>0&&index<nodesNum-1)
+    {
+        for(var i=index;i<nodesNum-1;i++)
+        allnodes[i].id="node"+i;
+       
+    }
+    
+}
+
 
 var numberOfPlacedNodes = 0;
 var cursorPos = {
