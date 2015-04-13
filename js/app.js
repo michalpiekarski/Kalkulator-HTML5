@@ -10,10 +10,10 @@ function toggleToolsCategory(category) {
 
 function addToGraph(node) {
     var newNode = document.createElement("div");
-    newNode.innerHTML = node.innerHTML;
     newNode.setAttribute("class", "main-graph-node");
     newNode.id = "node"+numberOfPlacedNodes;
     numberOfPlacedNodes++;
+    newNode.innerHTML = node.innerHTML + "<br/>" + newNode.id;
     newNode.style.top = (25*numberOfPlacedNodes).toString()+"px";
     newNode.style.left = (25*numberOfPlacedNodes).toString()+"px";
     newNode.setAttribute("draggable", "true");
@@ -30,7 +30,7 @@ function addToGraph(node) {
         event.preventDefault();
         this.style.top = (cursorPos.y-this.offsetHeight/2).toString() + "px";
         this.style.left = (cursorPos.x-this.offsetWidth/2).toString() + "px";
-        this.innerHTML = this.id + "<br/>" + cursorPos.x + ", " + cursorPos.y;
+        // this.innerHTML = this.id + "<br/>" + cursorPos.x + ", " + cursorPos.y;
     });
     newNode.addEventListener("dragend", function(event) {
        var clone = this.getElementById("clone-node");
