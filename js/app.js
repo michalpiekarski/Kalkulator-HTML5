@@ -108,6 +108,7 @@ for(var i=0; i<nodes.length; i++) {
     nodes[i].addEventListener("click", function() {
         addToGraph(this);
     });
+    nodes[i].addEventListener("mousemove",ToolDescription);
 }
 
 var ttct = document.getElementsByClassName("toolbox-tools-category-title");
@@ -115,4 +116,11 @@ for(var i=0; i<ttct.length; i++) {
     ttct[i].addEventListener("click", function(event) {
         toggleToolsCategory(this.nextElementSibling, event);
     });
+}
+
+function ToolDescription(event)
+{
+    var opis = event.currentTarget.nextElementSibling;
+    opis.style.top=event.clientY+"px";
+    opis.style.left=(event.clientX - opis.offsetWidth-20)+"px";
 }
