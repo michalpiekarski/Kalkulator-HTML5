@@ -60,16 +60,65 @@ html, body {
 }
 
 .main-graph-node {
-    width: 100px;
-    height: 100px;
+    min-width: 100px;
+    min-height: 120px;
     position: absolute;
     top: 0;
     left: 0;
     border: 1px solid white;
+    background-color: black;
+}
+
+.node-container {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.pin {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    box-sizing: border-box;
+    background-color: red;
+    border-radius: 50%;
+    border: 2px solid yellow;
+    box-shadow: 0 0 5px 0 yellow inset;
+    padding: 5px;
+    margin: 0 5px;
+}
+
+.output-pin {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+
+.close-button {
+    display: block;
+    box-sizing: border-box;
+    min-width: 2em;
+    min-height: 2em;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-top: 5px;
+    border: 1px solid red;
+    text-decoration: none;
+    text-align: center;
+    color: red;
 }
 
 .drag-handle {
+    display: block;
+    box-sizing: border-box;
+    min-width: 2em;
+    min-height: 2em;
+    position: absolute;
+    bottom: 0;
+    left: 0;
     cursor: move;
+    border: 1px solid green;
+    color: green;
 }
 
 #main-commands {

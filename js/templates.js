@@ -2,134 +2,116 @@ var inputPin = "<div class='pin input-pin'></div>";
 var outputPin = "<div class='pin output-pin'></div>";
 var inputNumberXWithLabel = "<label>X<input type='number' /></label>";
 var inputNumberYWithLabel = "<label>Y<input type='number' /></label>";
-var closeButton = "<a href='#' onClick='deleteNode(this.parentElement)'>X</a>";
+var closeButton = "<a href='#' class='close-button' onClick='deleteNode(this.parentElement)'>X</a>";
 var moveHandle = "<a href='#' class='drag-handle'>MOVE</a>";
+var createContainer = function(elements) {
+    var result = "<div class='node-container'>";
+    result += elements.join("\n");
+    result += "</div>";
+    return result;
+}
 var  templates = {
     "dodawanie" : [
         closeButton,
-        inputPin,
-        inputNumberXWithLabel,
-        inputPin,
-        inputNumberYWithLabel,
+        createContainer([inputPin, inputNumberXWithLabel]),
+        createContainer([inputPin, inputNumberYWithLabel]),
         outputPin,
         moveHandle
         ],
     "odejmowanie" : [
         closeButton,
-        inputPin,
-        inputNumberXWithLabel,
-        inputPin,
-        inputNumberYWithLabel,
+        createContainer([inputPin, inputNumberXWithLabel]),
+        createContainer([inputPin, inputNumberYWithLabel]),
         outputPin,
         moveHandle
         ],
     "mnozenie" : [
         closeButton,
-        inputPin,
-        inputNumberXWithLabel,
-        inputPin,
-        inputNumberYWithLabel,
+        createContainer([inputPin, inputNumberXWithLabel]),
+        createContainer([inputPin, inputNumberYWithLabel]),
         outputPin,
         moveHandle
         ],
     "dzielenie" : [
         closeButton,
-        inputPin,
-        inputNumberXWithLabel,
-        inputPin,
-        inputNumberYWithLabel,
+        createContainer([inputPin, inputNumberXWithLabel]),
+        createContainer([inputPin, inputNumberYWithLabel]),
         outputPin,
         moveHandle
         ],
     "negacja" : [
         closeButton,
-        inputPin,
-        inputNumberXWithLabel,
+        createContainer([inputPin, inputNumberXWithLabel]),
         outputPin,
         moveHandle
         ],
     "potegowanie" : [
         closeButton,
-        inputPin,
-        inputNumberXWithLabel,
-        inputPin,
-        inputNumberYWithLabel,
+        createContainer([inputPin, inputNumberXWithLabel]),
+        createContainer([inputPin, inputNumberYWithLabel]),
         outputPin,
         moveHandle
         ],
     "pierwiastkowanie" : [
         closeButton,
-        inputPin,
-        inputNumberXWithLabel,
-        inputPin,
-        inputNumberYWithLabel,
+        createContainer([inputPin, inputNumberXWithLabel]),
+        createContainer([inputPin, inputNumberYWithLabel]),
         outputPin,
         moveHandle
         ],
     "logarytm" : [
         closeButton,
-        inputPin,
-        inputNumberXWithLabel,
-        inputPin,
-        inputNumberYWithLabel,
+        createContainer([inputPin, inputNumberXWithLabel]),
+        createContainer([inputPin, inputNumberYWithLabel]),
         outputPin,
         moveHandle
         ],
     "silnia" : [
         closeButton,
-        inputPin,
-        inputNumberXWithLabel,
+        createContainer([inputPin, inputNumberXWithLabel]),
         outputPin,
         moveHandle
         ],
     "modulo" : [
         closeButton,
-        inputPin,
-        inputNumberXWithLabel,
-        inputPin,
-        inputNumberYWithLabel,
+        createContainer([inputPin, inputNumberXWithLabel]),
+        createContainer([inputPin, inputNumberYWithLabel]),
         outputPin,
         moveHandle
         ],
     "sinus" : [
         closeButton,
-        inputPin,
-        inputNumberXWithLabel,
+        createContainer([inputPin, inputNumberXWithLabel]),
         outputPin,
         moveHandle
         ],
     "cosinus" : [
         closeButton,
-        inputPin,
-        inputNumberXWithLabel,
+        createContainer([inputPin, inputNumberXWithLabel]),
         outputPin,
         moveHandle
         ],
     "tangens" : [
         closeButton,
-        inputPin,
-        inputNumberXWithLabel,
+        createContainer([inputPin, inputNumberXWithLabel]),
         outputPin,
         moveHandle
         ],
     "cotangens" : [
         closeButton,
-        inputPin,
-        inputNumberXWithLabel,
+        createContainer([inputPin, inputNumberXWithLabel]),
         outputPin,
         moveHandle
         ],
     "secans" : [
         closeButton,
-        inputPin,
-        inputNumberXWithLabel,
+        createContainer([inputPin, inputNumberXWithLabel]),
         outputPin,
         moveHandle
         ],
     "cosecans" : [
         closeButton,
-        inputPin,
-        inputNumberXWithLabel,
+        createContainer([inputPin, inputNumberXWithLabel]),
         outputPin,
         moveHandle
         ],
