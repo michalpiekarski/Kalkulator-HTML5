@@ -56,7 +56,16 @@ html, body {
     left: 0;
     background-color: black;
     color: white;
-    overflow: scroll;
+    overflow: auto;
+}
+
+#end-of-graph {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    border: 1px solid white;
 }
 
 .main-graph-node {

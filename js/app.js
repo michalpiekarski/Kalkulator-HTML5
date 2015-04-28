@@ -18,7 +18,7 @@
             yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
             element = element.offsetParent;
         }
-        
+
         return {
             x: xPosition,
             y: yPosition
@@ -41,7 +41,7 @@
         var left = Math.min(start_pos.x, end_pos.x) + 5;
         var inverse_v = top < start_pos.y ? 1 : 0;
         var inverse_h = left < start_pos.x ? 1 : 0;
-        
+
         connection.setAttribute("height", height);
         connection.setAttribute("width", width);
         connection.style.width = width.toString() + "px";
@@ -49,13 +49,13 @@
         connection.style.position = "absolute";
         connection.style.top = top.toString() + "px";
         connection.style.left = left.toString() + "px";
-        
+
         var ctx = connection.getContext("2d");
         ctx.clearRect(0, 0, width, height);
         ctx.moveTo(
             width * inverse_h,
             height * inverse_v
-            );
+        );
         ctx.strokeStyle = "white";
         ctx.bezierCurveTo(
             width / 2,
@@ -64,7 +64,7 @@
             height * (1 - inverse_v),
             width * (1 - inverse_h),
             height * (1 - inverse_v)
-            );
+        );
         ctx.stroke();
     }
 
@@ -73,26 +73,26 @@
             if (Connecting) {
                 console.log("end connection");
                 Connecting = false;
-                
+
                 var ConnectionNode = document.createElement("canvas");
                 ConnectionNode.setAttribute("class", "main-graph-connection");
                 ConnectionNode.id = "connection" + ConnectionNum.toString();
                 event.currentTarget.id = "PinIn" + ConnectionNum.toString();
                 ConnectionNum++;
-                
+
                 ConnectionSettings.EndPin = event.currentTarget;
                 ConnectionNode.dataset.StartPin = ConnectionSettings.StartPin.id;
                 ConnectionNode.dataset.EndPin = ConnectionSettings.EndPin.id;
-                
+
                 CreateConnection(ConnectionNode);
-                
+
                 var Graph = document.getElementById("main-graph");
                 Graph.appendChild(ConnectionNode);
             }
             else {
                 console.log("start connection");
                 Connecting = true;
-                
+
                 event.currentTarget.id = "PinOut" + ConnectionNum.toString();
                 ConnectionSettings.StartPin = event.currentTarget;
             }
@@ -189,33 +189,33 @@
                 allnodes[i].id = "node" + i;
         }
     }
-function licz()
-{
-    var X=0;
-    var Y=0;
-    var typ;
-    var tab=document.getElementsByTagName("input");
-    var wynik=0;
-   switch (typ) {
-       case 'Dodawanie':
-           wynik=X+Y;
-           break;
-       case 'Odejmowanie':
-           wynik=X-Y;
-           break;
-        case 'Mnożenie':
-            wynik=X*Y;
-            break;
-        case 'Dzielenie':
-            wynik=X/Y;
-            break;
-        case 'Negacja':
-            wynik*=-1;
-            break;
-       default:
-           wynik=0;
-   }
-}
+
+    function licz() {
+        var X = 0;
+        var Y = 0;
+        var typ;
+        var tab = document.getElementsByTagName("input");
+        var wynik = 0;
+        switch (typ) {
+            case 'Dodawanie':
+                wynik = X + Y;
+                break;
+            case 'Odejmowanie':
+                wynik = X - Y;
+                break;
+            case 'Mnożenie':
+                wynik = X * Y;
+                break;
+            case 'Dzielenie':
+                wynik = X / Y;
+                break;
+            case 'Negacja':
+                wynik *= -1;
+                break;
+            default:
+                wynik = 0;
+        }
+    }
 
 
     var numberOfPlacedNodes = 0;
@@ -254,3 +254,13 @@ function licz()
         opis.style.top = event.clientY + "px";
         opis.style.left = (event.clientX - opis.offsetWidth - 20) + "px";
     }
+
+    function changeGraphExtend() {
+        var xEx = document.getElementById('graphXExtend');
+        var yEx = document.getElementById('graphYExtend');
+
+        var eog = document.getElementById("end-of-graph");
+        eog.style.right = (-xEx.value).toString() + "px";
+        eog.style.bottom = (-yEx.value).toString() + "px";
+    }
+    
