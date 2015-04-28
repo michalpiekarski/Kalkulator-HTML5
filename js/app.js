@@ -170,8 +170,16 @@
                 nodes[0].removeEventListener("dragend", nodeDragEnd);
                 graph.removeChild(nodes[0]);
             }
+            numberOfPlacedNodes = 0;
         }
-        numberOfPlacedNodes = 0;
+        var connections = graph.getElementsByClassName('main-graph-connection');
+        var connectionsNum = connections.length;
+        if(connectionsNum > 0) {
+            for(var i = 0; i < connectionsNum; i++) {
+                graph.removeChild(connections[0]);
+            }
+            ConnectionNum = 0;
+        }
     }
 
     function deleteNode(node) {
