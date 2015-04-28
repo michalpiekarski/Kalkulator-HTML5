@@ -189,6 +189,33 @@
                 allnodes[i].id = "node" + i;
         }
     }
+function licz()
+{
+    var X=0;
+    var Y=0;
+    var typ;
+    var tab=document.getElementsByTagName("input");
+    var wynik=0;
+   switch (typ) {
+       case 'Dodawanie':
+           wynik=X+Y;
+           break;
+       case 'Odejmowanie':
+           wynik=X-Y;
+           break;
+        case 'Mnożenie':
+            wynik=X*Y;
+            break;
+        case 'Dzielenie':
+            wynik=X/Y;
+            break;
+        case 'Negacja':
+            wynik*=-1;
+            break;
+       default:
+           wynik=0;
+   }
+}
 
 
     var numberOfPlacedNodes = 0;
