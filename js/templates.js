@@ -1,5 +1,5 @@
-var inputPin = "<div class='pin input-pin'></div>";
-var outputPin = "<div class='pin output-pin'></div>";
+var inputPin = "<a href='#' class='pin input-pin' onClick='ConnectionClick(event)'></a>";
+var outputPin = "<a href='#' class='pin output-pin' onClick='ConnectionClick(event)'></a>";
 var inputNumberXWithLabel = "<label>X<input type='number' /></label>";
 var inputNumberYWithLabel = "<label>Y<input type='number' /></label>";
 var closeButton = "<a href='#' class='close-button' onClick='deleteNode(this.parentElement)'>X</a>";
