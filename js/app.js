@@ -35,8 +35,8 @@
     function CreateConnection(connection) {
         var start_pos = getPosition(document.getElementById(connection.dataset.StartPin));
         var end_pos = getPosition(document.getElementById(connection.dataset.EndPin));
-        var width = Math.abs(end_pos.x - start_pos.x);
-        var height = Math.abs(end_pos.y - start_pos.y);
+        var width = Math.max(1,Math.abs(end_pos.x - start_pos.x));
+        var height = Math.max(1,Math.abs(end_pos.y - start_pos.y));
         var top = Math.min(start_pos.y, end_pos.y) + 5;
         var left = Math.min(start_pos.x, end_pos.x) + 5;
         var inverse_v = top < start_pos.y ? 1 : 0;
