@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
+
         <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/main.css" type="text/css" />
     </head>
@@ -9,7 +9,14 @@
         <div id="app">
             <div id="main">
                 <div id="main-graph">
-                    Graf
+                  <div id="result-node" draggable="true" ondragstart="nodeDragStart(event);" ondrag="nodeDrag(event);" ondragend="nodeDragEnd(event);">
+                    Wynik
+                    <div class='node-container'>
+                      <a href='#' class='pin input-pin' onClick='ConnectionClick(event)'></a>
+                      <label>X<input type='number' /></label>
+                    </div>
+                    <a href='#' class='drag-handle'>MOVE</a>
+                  </div>
                     <div id="end-of-graph"></div>
                 </div>
                 <footer id="main-commands">

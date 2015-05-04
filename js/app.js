@@ -120,8 +120,8 @@
 
     function nodeDrag(event) {
         event.preventDefault();
-        this.style.top = (cursorPos.y - this.offsetHeight / 2).toString() + "px";
-        this.style.left = (cursorPos.x - this.offsetWidth / 2).toString() + "px";
+        event.currentTarget.style.top = (cursorPos.y - event.currentTarget.offsetHeight / 2).toString() + "px";
+        event.currentTarget.style.left = (cursorPos.x - event.currentTarget.offsetWidth / 2).toString() + "px";
     }
 
     function nodeDragEnd(event) {
@@ -172,6 +172,7 @@
             }
             numberOfPlacedNodes = 0;
         }
+        document.getElementById("result-node").getElementsByClassName("input-pin")[0].removeAttribute("id");
         var connections = graph.getElementsByClassName('main-graph-connection');
         var connectionsNum = connections.length;
         if(connectionsNum > 0) {
@@ -271,4 +272,3 @@
         eog.style.right = (-xEx.value).toString() + "px";
         eog.style.bottom = (-yEx.value).toString() + "px";
     }
-    

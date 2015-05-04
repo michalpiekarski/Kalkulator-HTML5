@@ -68,6 +68,16 @@ html, body {
     border: 1px solid white;
 }
 
+#result-node {
+    min-width: 100px;
+    min-height: 120px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 1px solid white;
+    background-color: black;
+}
+
 .main-graph-node {
     min-width: 100px;
     min-height: 120px;
@@ -288,6 +298,6 @@ html, body {
     background-color:black;
     color:white;
 }
-.toolbox-tool:hover + .toolbox-tool-info { 
+.toolbox-tool:hover + .toolbox-tool-info {
     display:block;
 }
