@@ -31,6 +31,7 @@
         "EndPin": null
     };
     var ConnectionNum = 0;
+    var PinNum = 0;
 
     function CreateConnection(connection) {
         var start_pos = getPosition(document.getElementById(connection.dataset.StartPin));
@@ -69,38 +70,114 @@
     }
 
     function ConnectionClick(event) {
-        if (event.target.getAttribute("class").indexOf("pin") > -1 && !event.currentTarget.hasAttribute("id")) {
+        event.preventDefault();
+        if(checkIfIsPin(event.currentTarget)) {
+          if (checkIfPinNotConnected(event.currentTarget)) {
+              if (Connecting && checkMatchingPinTypes(event.currentTarget, ConnectionSettings.StartPin) && checkPinParents(event.currentTarget, ConnectionSettings.StartPin)) {
+                  endConnection(event.currentTarget, false);
+              } else if (!Connecting) {
+                  startConnection(event.currentTarget, false);
+              }
+          } else if (event.currentTarget.getAttribute('class').indexOf('output') > -1) {
             if (Connecting) {
-                console.log("end connection");
-                Connecting = false;
-
-                var ConnectionNode = document.createElement("canvas");
-                ConnectionNode.setAttribute("class", "main-graph-connection");
-                ConnectionNode.id = "connection" + ConnectionNum.toString();
-                event.currentTarget.id = "PinIn" + ConnectionNum.toString();
-                ConnectionNum++;
-
-                ConnectionSettings.EndPin = event.currentTarget;
-                ConnectionNode.dataset.StartPin = ConnectionSettings.StartPin.id;
-                ConnectionNode.dataset.EndPin = ConnectionSettings.EndPin.id;
-
-                CreateConnection(ConnectionNode);
-
-                var Graph = document.getElementById("main-graph");
-                Graph.appendChild(ConnectionNode);
+              endConnection(event.currentTarget, true);
+            } else {
+              startConnection(event.currentTarget, true);
             }
-            else {
-                console.log("start connection");
-                Connecting = true;
+          }
+        }
+    }
 
-                event.currentTarget.id = "PinOut" + ConnectionNum.toString();
-                ConnectionSettings.StartPin = event.currentTarget;
-            }
-        }
-        else {
-            console.log("connection error");
-            event.PreventDefault();
-        }
+    function startConnection(pin, keepID) {
+      console.log("start connection");
+      Connecting = true;
+
+      if(!keepID) {
+        pin.id = "Pin" + PinNum.toString();
+        PinNum++;
+      }
+      ConnectionSettings.StartPin = pin;
+    }
+
+    function endConnection(pin, keepID) {
+      console.log("end connection");
+      Connecting = false;
+
+      var ConnectionNode = document.createElement("canvas");
+      ConnectionNode.setAttribute("class", "main-graph-connection");
+      ConnectionNode.id = "connection" + ConnectionNum.toString();
+      if(!keepID) {
+        pin.id = "Pin" + PinNum.toString();
+        PinNum++;
+      }
+      ConnectionNum++;
+
+      ConnectionSettings.EndPin = pin;
+      ConnectionNode.dataset.StartPin = ConnectionSettings.StartPin.id;
+      ConnectionNode.dataset.EndPin = ConnectionSettings.EndPin.id;
+
+      var sp = document.getElementById(ConnectionSettings.StartPin.id);
+      console.log(sp.dataset.connection);
+      if(sp.dataset.connection === undefined) {
+        sp.dataset.connection = ConnectionNode.id;
+      } else {
+        sp.dataset.connection += "&" + ConnectionNode.id;
+      }
+      var ep = document.getElementById(ConnectionSettings.EndPin.id);
+      if(ep.dataset.connection === undefined) {
+        ep.dataset.connection = ConnectionNode.id;
+      } else {
+        ep.dataset.connection += "&" + ConnectionNode.id;
+      }
+
+      CreateConnection(ConnectionNode);
+
+      var Graph = document.getElementById("main-graph");
+      Graph.appendChild(ConnectionNode);
+
+      ConnectionSettings = {
+          "StartPin": null,
+          "EndPin": null
+      };
+    }
+
+    function checkIfIsPin(pin) {
+      if(pin.getAttribute("class").indexOf("pin") > -1) {
+        return true;
+      } else {
+        console.error("Target is not a pin");
+        return false;
+      }
+    }
+
+    function checkIfPinNotConnected(pin) {
+      if(!pin.hasAttribute("id")) {
+        return true;
+      } else {
+        console.error("Pin already connected");
+        return false;
+      }
+    }
+
+    function checkMatchingPinTypes(pin1, pin2) {
+      var pin1Class = pin1.getAttribute('class');
+      var pin2Class = pin2.getAttribute('class');
+      if((pin1Class.indexOf('input') > -1 && pin2Class.indexOf("output") > -1) || (pin1Class.indexOf('output') > -1 && pin2Class.indexOf("input") > -1)) {
+        return true;
+      } else {
+        console.error("Pins are not of matching types");
+        return false;
+      }
+    }
+
+    function checkPinParents(pin1, pin2) {
+      var pin1Class = pin1.getAttribute('class');
+      if((pin1Class.indexOf('input') > -1 && pin1.parentElement.parentElement !== pin2.parentElement) || (pin1Class.indexOf('output') > -1 && pin1.parentElement !== pin2.parentElement.parentElement)) {
+        return true;
+      } else {
+        console.error("Pins are from the same node");
+        return false;
+      }
     }
 
     function nodeDragStart(event) {
@@ -131,13 +208,9 @@
         var pins = event.currentTarget.getElementsByClassName("pin");
         for (var i = 0; i < pins.length; i++) {
             if (pins[i].hasAttribute("id")) {
-                if (pins[i].id.indexOf("In") > -1) {
-                    var connection_num = "connection" + pins[i].id.substr(5);
-                    CreateConnection(document.getElementById(connection_num));
-                }
-                else if (pins[i].id.indexOf("Out") > -1) {
-                    var connection_num = "connection" + pins[i].id.substr(6);
-                    CreateConnection(document.getElementById(connection_num));
+                var pinConnections = pins[i].dataset.connection.split("&");
+                for(var j = 0; j < pinConnections.length; j++) {
+                  CreateConnection(document.getElementById(pinConnections[j]));
                 }
             }
         }
@@ -173,6 +246,7 @@
             }
             numberOfPlacedNodes = 0;
         }
+        PinNum = 0;
         document.getElementById("result-node").getElementsByClassName("input-pin")[0].removeAttribute("id");
         var connections = graph.getElementsByClassName('main-graph-connection');
         var connectionsNum = connections.length;
