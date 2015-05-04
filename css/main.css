@@ -70,22 +70,24 @@ html, body {
 
 #result-node {
     min-width: 100px;
-    min-height: 120px;
+    min-height: 100px;
     position: absolute;
     top: 50%;
     left: 50%;
     border: 1px solid white;
     background-color: black;
+    z-index: 50;
 }
 
 .main-graph-node {
-    min-width: 100px;
+    min-width: 200px;
     min-height: 120px;
     position: absolute;
     top: 0;
     left: 0;
     border: 1px solid white;
     background-color: black;
+    z-index: 50;
 }
 
 .node-container {
@@ -106,10 +108,15 @@ html, body {
     margin: 0 5px;
 }
 
+.input-pin {
+    position: relative;
+    left: -15px;
+}
+
 .output-pin {
     position: absolute;
     bottom: 5px;
-    right: 5px;
+    right: -15px;
 }
 
 .close-button {

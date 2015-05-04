@@ -14,8 +14,8 @@
         var yPosition = 0;
 
         while (element) {
-            xPosition += (element.offsetLeft - element.scrollLeft + element.clientLeft);
-            yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
+            xPosition += (element.offsetLeft + element.clientLeft);
+            yPosition += (element.offsetTop + element.clientTop);
             element = element.offsetParent;
         }
 
@@ -50,21 +50,23 @@
         connection.style.position = "absolute";
         connection.style.top = top.toString() + "px";
         connection.style.left = left.toString() + "px";
+        connection.style.zIndex = "10";
 
         var ctx = connection.getContext("2d");
         ctx.clearRect(0, 0, width, height);
+        ctx.strokeStyle = "white";
+        ctx.lineWidth = 2.5;
         ctx.moveTo(
             width * inverse_h,
-            height * inverse_v
+            height * inverse_v + (ctx.lineWidth * (inverse_h===1?-1:1))
         );
-        ctx.strokeStyle = "white";
         ctx.bezierCurveTo(
             width / 2,
             height * inverse_v,
             width / 2,
             height * (1 - inverse_v),
             width * (1 - inverse_h),
-            height * (1 - inverse_v)
+            height * (1 - inverse_v) - (ctx.lineWidth * (inverse_h===1?-1:1))
         );
         ctx.stroke();
     }
@@ -217,19 +219,19 @@
     }
 
     function addToGraph(node) {
+        var graph = document.getElementById("main-graph");
         var newNode = document.createElement("div");
         newNode.setAttribute("class", "main-graph-node");
         newNode.id = "node" + numberOfPlacedNodes;
         newNode.dataset.template = node.dataset.template;
         numberOfPlacedNodes++;
         newNode.innerHTML = node.innerHTML + "<br/>" + newNode.id + templates[node.dataset.template].join("\n");
-        newNode.style.top = (25 * numberOfPlacedNodes).toString() + "px";
-        newNode.style.left = (25 * numberOfPlacedNodes).toString() + "px";
+        newNode.style.top = (25 * numberOfPlacedNodes + graph.scrollTop).toString() + "px";
+        newNode.style.left = (25 * numberOfPlacedNodes + graph.scrollLeft).toString() + "px";
         newNode.setAttribute("draggable", "true");
         newNode.addEventListener("dragstart", nodeDragStart, false);
         newNode.addEventListener('drag', nodeDrag);
         newNode.addEventListener("dragend", nodeDragEnd);
-        var graph = document.getElementById("main-graph");
         graph.appendChild(newNode);
     }
 
@@ -313,8 +315,8 @@
     var graph = document.getElementById("main-graph");
     graph.addEventListener('dragover', function(event) {
         event.preventDefault();
-        cursorPos.x = event.clientX;
-        cursorPos.y = event.clientY;
+        cursorPos.x = event.clientX + event.currentTarget.scrollLeft;
+        cursorPos.y = event.clientY + event.currentTarget.scrollTop;
     });
     graph.addEventListener('drop', function(event) {
         event.preventDefault();
