@@ -247,7 +247,9 @@
             numberOfPlacedNodes = 0;
         }
         PinNum = 0;
-        document.getElementById("result-node").getElementsByClassName("input-pin")[0].removeAttribute("id");
+        var rnp = document.getElementById("result-node").getElementsByClassName("input-pin")[0];
+        rnp.removeAttribute("id");
+        rnp.removeAttribute('data-connection');
         var connections = graph.getElementsByClassName('main-graph-connection');
         var connectionsNum = connections.length;
         if(connectionsNum > 0) {
