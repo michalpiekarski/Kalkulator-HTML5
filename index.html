@@ -4,6 +4,7 @@
 
         <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/main.css" type="text/css" />
+        <title>Kalkulator HTML5</title>
     </head>
     <body>
         <div id="app">
@@ -14,21 +15,23 @@
                     <div class='node-container'>
                       <a href='#' class='pin input-pin' onClick='ConnectionClick(event)'></a>
                     </div>
-                    <a href='#' class='drag-handle'>MOVE</a>
+                    <a href='#' class='drag-handle'>@</a>
                   </div>
                     <div id="end-of-graph"></div>
                 </div>
                 <footer id="main-commands">
-                    <div>
+
+                    <button id="calculate-equation" onclick="CalculateEquation();">Oblicz</button>
+                    <button id="clear-graph" onclick="clearGraph()">Wyczyść</button>
+
+                    <div name="size">
                         <label>Dodaj szerokości: <input id="graphXExtend" type="range" min="0" max="1000" value="0" onchange="changeGraphExtend();"/></label><br/>
                         <label>Dodaj wysokości: <input id="graphYExtend" type="range" min="0" max="1000" value="0" onchange="changeGraphExtend();"/></label>
                     </div>
-                    <button id="calculate-equation" onclick="CalculateEquation();">Oblicz</button>
-                    <button id="clear-graph" onclick="clearGraph()">Wyczyść</button>
                 </footer>
             </div>
             <div id="toolbox">
-                <h2 id="toolbox-title">Toolbox</h2>
+                <h2 id="toolbox-title">TOOLBOX</h2>
                 <dl id="toolbox-tools">
                     <!--KATEGORIA - PODSTAWOWE DZIAŁANIA-->
                     <h3 class="toolbox-tools-category-title">Podstawowe działania</h3>
@@ -37,7 +40,7 @@
                         <dd class="toolbox-tool-info">Pozwala dodać 2 argumenty</dd>
                         <dt class="toolbox-tool" data-template="odejmowanie">Odejmowanie</dt>
                         <dd class="toolbox-tool-info">Pozwala odjąć drugi argument od pierwszego</dd>
-                        <dt class="toolbox-tool" data-template="mnozenie">Mnożenie</dt>
+                        <dt class="toolbox-tool" data-template="mnozenie">Mnozenie</dt>
                         <dd class="toolbox-tool-info">Pozwala pomnożyć 2 argumenty przez siebie</dd>
                         <dt class="toolbox-tool" data-template="dzielenie">Dzielenie</dt>
                         <dd class="toolbox-tool-info">Pozwala podzielić pierwszy argument przez drugi</dd>
@@ -47,7 +50,7 @@
                     <!--KATEGORIA - ZAAWANSOWANE DZIAŁANIA-->
                     <h3 class="toolbox-tools-category-title">Zaawansowane działania</h3>
                     <dl class="toolbox-tools-category" hidden>
-                        <dt class="toolbox-tool" data-template="potegowanie">Potęgowanie</dt>
+                        <dt class="toolbox-tool" data-template="potegowanie">Potegowanie</dt>
                         <dd class="toolbox-tool-info">Pozwala podnieść pierwszy argument do potęgi o wartości drugiego argumentu</dd>
                         <dt class="toolbox-tool" data-template="pierwiastkowanie">Pierwiastkowanie</dt>
                         <dd class="toolbox-tool-info">Pozwala wyciągnąć z pierwszego argumentu pierwiastek stopnia o wartości drugiego argumentu</dd>
@@ -77,9 +80,9 @@
                     <!--KATEGORIA - STAŁE MATEMATYCZNE-->
                     <h3 class="toolbox-tools-category-title">Stałe matematyczne</h3>
                     <dl class="toolbox-tools-category" hidden>
-                        <dt class="toolbox-tool" data-template="stala_pi">PI</dt>
+                        <dt class="toolbox-tool" data-template="stala_pi"></dt>
                         <dd class="toolbox-tool-info">Zwraca wartość stałej PI</dd>
-                        <dt class="toolbox-tool" data-template="stala_epsilon">Epsilon</dt>
+                        <dt class="toolbox-tool" data-template="stala_epsilon"></dt>
                         <dd class="toolbox-tool-info">Zwraca wartość stałej epsilon</dd>
                     </dl>
                 </dl>

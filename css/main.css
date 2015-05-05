@@ -7,6 +7,20 @@ html, body {
     height: 100%;
 }
 
+footer {
+    border: 5px ridge #535353;
+    color: white;
+    background: #535353;
+    text-shadow: 2px 2px #171717;
+    text-align: center;
+}
+
+a {
+text-decoration: none;
+}
+
+
+
 #app {
     display: -webkit-flex;
     display: flex;
@@ -20,6 +34,7 @@ html, body {
     align-content: stretch;
     width: 100%;
     min-height: 100%;
+    font-family: helvetica;
 }
 
 #main, #toolbox {
@@ -54,7 +69,7 @@ html, body {
     position: relative;
     top: 0;
     left: 0;
-    background-color: black;
+    background: -webkit-radial-gradient(center, ellipse cover, #c3c3c3 0%,#717171 100%);;
     color: white;
     overflow: auto;
 }
@@ -66,6 +81,7 @@ html, body {
     right: 0px;
     bottom: 0px;
     border: 1px solid white;
+    visibility: hidden;
 }
 
 #result-node {
@@ -74,9 +90,16 @@ html, body {
     position: absolute;
     top: 50%;
     left: 50%;
-    border: 1px solid white;
-    background-color: black;
+    border: 8px ridge #535353;
+    background-color: #757575;
     z-index: 50;
+    color: white;
+    text-shadow: 2px 2px #171717;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    
+
 }
 
 .main-graph-node {
@@ -85,9 +108,15 @@ html, body {
     position: absolute;
     top: 0;
     left: 0;
-    border: 1px solid white;
-    background-color: black;
+    border: 8px ridge #535353;
+    background-color: #757575;
     z-index: 50;
+    color: white;
+    text-shadow: 2px 2px #171717;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+
 }
 
 .node-container {
@@ -95,14 +124,27 @@ html, body {
     width: 100%;
 }
 
+.node-container input {
+    border: 1px solid black; 
+    -webkit-border-radius: 30px; 
+    -moz-border-radius: 30px; 
+    border-radius: 30px; 
+    outline:0; 
+    height:25px; 
+    width: 60px; 
+    text-align: center;
+ 
+}
+
 .pin {
+    float: left;
     display: inline-block;
     width: 1em;
     height: 1em;
     box-sizing: border-box;
-    background-color: red;
+    background-color: white;
     border-radius: 50%;
-    border: 2px solid yellow;
+    border: 2px solid black;
     box-shadow: 0 0 5px 0 yellow inset;
     padding: 5px;
     margin: 0 5px;
@@ -128,10 +170,10 @@ html, body {
     top: 0;
     right: 0;
     padding-top: 5px;
-    border: 1px solid red;
+    border: none;
     text-decoration: none;
     text-align: center;
-    color: red;
+    color: white;
 }
 
 .drag-handle {
@@ -143,8 +185,8 @@ html, body {
     bottom: 0;
     left: 0;
     cursor: move;
-    border: 1px solid green;
-    color: green;
+    font-size: 15px;
+    color: white;
 }
 
 #main-commands {
@@ -164,7 +206,7 @@ html, body {
     flex-shrink: 0;
     -webkit-flex-basis: 50px;
     flex-basis: 50px;
-    background-color: brown;
+    background-color: #535353;
 }
 
 #calculate-equation {
@@ -198,16 +240,22 @@ html, body {
     align-content: stretch;
     -webkit-flex-basis: 25%;
     flex-basis: 25%;
+    border: 5px ridge #535353;
 }
 
 #toolbox-title, #toolbox-settings {
+    color: white;
+    line-height: 30px;
+    text-align: center;
     -webkit-flex-grow: 0;
     flex-grow: 0;
     -webkit-flex-shrink: 0;
     flex-shrink: 0;
     -webkit-flex-basis: 30px;
     flex-basis: 30px;
-    background-color: pink;
+    background-color: #535353;
+    border: 5px ridge #535353;
+    text-shadow: 2px 2px #171717;
 }
 
 #toolbox-tools {
@@ -231,7 +279,8 @@ html, body {
     flex-basis: 300px;
     overflow-x: hidden;
     overflow-y: auto;
-    background-color: yellow;
+    background-color: gray;
+    color: transparent;
 }
 
 .toolbox-tools-category-title {
@@ -243,7 +292,12 @@ html, body {
     flex-basis: 100%;
     min-height: 30px;
     cursor: s-resize;
-    border: 1px solid blue;
+    border: 10px ridge #535353;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+    background: #535353;
+    text-shadow: 2px 2px #171717;
 }
 
 .toolbox-tools-category-title:first-of-type {
@@ -287,7 +341,7 @@ html, body {
     box-sizing: border-box;
     margin-bottom: 10px;
     cursor: copy;
-    border: 1px solid black;
+    
     margin-left: 5px;
     overflow: hidden;
 }
@@ -308,3 +362,183 @@ html, body {
 .toolbox-tool:hover + .toolbox-tool-info {
     display:block;
 }
+
+.toolbox-tool[data-template="dodawanie"]
+{
+    background-image: url("../img/add.png");
+
+}
+
+.toolbox-tool[data-template="odejmowanie"]
+{
+    background-image: url("../img/sub.png");
+
+}
+
+.toolbox-tool[data-template="mnozenie"]
+{
+    background-image: url("../img/mul.png");
+
+}
+
+.toolbox-tool[data-template="dzielenie"]
+{
+    background-image: url("../img/div.png");
+
+}
+
+.toolbox-tool[data-template="negacja"]
+{
+    background-image: url("../img/neg.png");
+
+}
+
+
+.toolbox-tool[data-template="potegowanie"]
+{
+    background-image: url("../img/pow.png");
+
+}
+
+.toolbox-tool[data-template="pierwiastkowanie"]
+{
+    background-image: url("../img/sqrt.png");
+
+}
+
+.toolbox-tool[data-template="logarytm"]
+{
+    background-image: url("../img/log.png");
+
+}
+
+.toolbox-tool[data-template="silnia"]
+{
+    background-image: url("../img/sil.png");
+
+}
+
+.toolbox-tool[data-template="modulo"]
+{
+    background-image: url("../img/mod.png");
+
+}
+
+.toolbox-tool[data-template="sinus"]
+{
+    background-image: url("../img/sin.png");
+
+}
+
+.toolbox-tool[data-template="cosinus"]
+{
+    background-image: url("../img/cos.png");
+
+}
+
+.toolbox-tool[data-template="tangens"]
+{
+    background-image: url("../img/tan.png");
+
+}
+
+.toolbox-tool[data-template="cotangens"]
+{
+    background-image: url("../img/cot.png");
+
+}
+
+.toolbox-tool[data-template="secans"]
+{
+    background-image: url("../img/sec.png");
+
+}
+
+.toolbox-tool[data-template="cosecans"]
+{
+    background-image: url("../img/cossec.png");
+
+}
+
+.toolbox-tool[data-template="stala_pi"]
+{
+    background-image: url("../img/pi.png");
+
+}
+
+.toolbox-tool[data-template="stala_epsilon"]
+{
+    background-image: url("../img/e.png");
+
+}
+
+input[type='range'] {
+        -webkit-appearance: none;
+        border-radius: 5px;
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        background-color: #999;
+        height: 10px;
+        vertical-align: middle;
+    }
+    input[type='range']::-moz-range-track {
+        -moz-appearance: none;
+        border-radius: 5px;
+        box-shadow: inset 0 0 5px #333;
+        background-color: #999;
+        height: 10px;
+    }
+    input[type='range']::-webkit-slider-thumb {
+        -webkit-appearance: none !important;
+        border-radius: 20px;
+        background-color: #FFF;
+        box-shadow:1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        border: 1px solid #999;
+        height: 15px;
+        width: 15px;
+    }
+    input[type='range']::-moz-range-thumb {
+        -moz-appearance: none;
+        border-radius: 10px;
+        background-color: #FFF;
+        box-shadow:inset 0 0 10px rgba(000,000,000,0.5);
+        border: 1px solid #999;
+        height: 15px;
+        width: 15px;
+    }
+
+    #size {
+    margin-left: 0px;
+    margin-right: auto;
+}
+
+#calculate-equation, #clear-graph {
+  background: #bdbdbd;
+  background-image: -webkit-linear-gradient(top, #bdbdbd, #525252);
+  background-image: -moz-linear-gradient(top, #bdbdbd, #525252);
+  background-image: -ms-linear-gradient(top, #bdbdbd, #525252);
+  background-image: -o-linear-gradient(top, #bdbdbd, #525252);
+  background-image: linear-gradient(to bottom, #bdbdbd, #525252);
+  -webkit-border-radius: 2;
+  -moz-border-radius: 2;
+  border: 1px solid #a9a9a9;
+  color: #ffffff;
+  font-size: 15px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  text-align: center;
+}
+
+#calculate-equation, #clear-graph {
+  background: #383838;
+  background-image: -webkit-linear-gradient(top, #383838, #141414);
+  background-image: -moz-linear-gradient(top, #383838, #141414);
+  background-image: -ms-linear-gradient(top, #383838, #141414);
+  background-image: -o-linear-gradient(top, #383838, #141414);
+  background-image: linear-gradient(to bottom, #383838, #141414);
+  text-decoration: none;
+}
+ 
+#nodeName {
+    margin-bottom: 50px;
+}
+

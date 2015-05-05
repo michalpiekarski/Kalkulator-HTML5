@@ -225,7 +225,7 @@
         newNode.id = "node" + numberOfPlacedNodes;
         newNode.dataset.template = node.dataset.template;
         numberOfPlacedNodes++;
-        newNode.innerHTML = node.innerHTML + "<br/>" + newNode.id + templates[node.dataset.template].join("\n");
+        newNode.innerHTML = node.innerHTML + "<br><span class='nodeName'><br/></span>" + templates[node.dataset.template].join("\n");
         newNode.style.top = (25 * numberOfPlacedNodes + graph.scrollTop).toString() + "px";
         newNode.style.left = (25 * numberOfPlacedNodes + graph.scrollLeft).toString() + "px";
         newNode.setAttribute("draggable", "true");
