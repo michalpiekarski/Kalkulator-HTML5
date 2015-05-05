@@ -269,41 +269,7 @@
         node.removeEventListener("dragstart", nodeDragStart);
         node.removeEventListener("drag", nodeDrag);
         node.removeEventListener("dragend", nodeDragEnd);
-        var pins = node.getElementsByClassName('pin');
-        var pinsNum = pins.length;
-        if(pinsNum > 0) {
-          for(var i = 0; i < pinsNum; i++) {
-            if(pins[i].hasAttribute('id')) {
-              PinNum--;
-              var pinConnections = pins[i].dataset.connection.split('&');
-              for(var j = 0; j < pinConnections.length; j++) {
-                var pinConnection = document.getElementById(pinConnections[j]);
-                var otherPin;
-                if(pins[i].id === pinConnection.dataset.StartPin) {
-                  otherPin = document.getElementById(pinConnection.dataset.EndPin);
-                } else if (pins[i].id === pinConnection.dataset.EndPin) {
-                  otherPin = document.getElementById(pinConnection.dataset.StartPin);
-                }
-                if(otherPin.dataset.connection === pinConnection.id) {
-                  otherPin.removeAttribute('data-connection');
-                  otherPin.removeAttribute('id');
-                  PinNum--;
-                } else {
-                  var pcs = otherPin.dataset.connection.split('&');
-                  var pcsresult = [];
-                  for (var k = 0; k < pcs.length; k++) {
-                    if(pcs[k] !== pinConnection.id) {
-                      pcsresult.push(pcs[k]);
-                    }
-                  }
-                  otherPin.dataset.connection = pcsresult.join('&');
-                }
-                graph.removeChild(pinConnection);
-                ConnectionNum--;
-              }
-            }
-          }
-        }
+        deleteNodeConnections(node);
         var index = parseInt(node.id.substr(4));
         graph.removeChild(node);
         numberOfPlacedNodes--;
@@ -311,6 +277,44 @@
             for (var i = index; i < nodesNum - 1; i++)
                 allnodes[i].id = "node" + i;
         }
+    }
+
+    function deleteNodeConnections(node) {
+      var pins = node.getElementsByClassName('pin');
+      var pinsNum = pins.length;
+      if(pinsNum > 0) {
+        for(var i = 0; i < pinsNum; i++) {
+          if(pins[i].hasAttribute('id')) {
+            PinNum--;
+            var pinConnections = pins[i].dataset.connection.split('&');
+            for(var j = 0; j < pinConnections.length; j++) {
+              var pinConnection = document.getElementById(pinConnections[j]);
+              var otherPin;
+              if(pins[i].id === pinConnection.dataset.StartPin) {
+                otherPin = document.getElementById(pinConnection.dataset.EndPin);
+              } else if (pins[i].id === pinConnection.dataset.EndPin) {
+                otherPin = document.getElementById(pinConnection.dataset.StartPin);
+              }
+              if(otherPin.dataset.connection === pinConnection.id) {
+                otherPin.removeAttribute('data-connection');
+                otherPin.removeAttribute('id');
+                PinNum--;
+              } else {
+                var pcs = otherPin.dataset.connection.split('&');
+                var pcsresult = [];
+                for (var k = 0; k < pcs.length; k++) {
+                  if(pcs[k] !== pinConnection.id) {
+                    pcsresult.push(pcs[k]);
+                  }
+                }
+                otherPin.dataset.connection = pcsresult.join('&');
+              }
+              graph.removeChild(pinConnection);
+              ConnectionNum--;
+            }
+          }
+        }
+      }
     }
 
     function licz() {
