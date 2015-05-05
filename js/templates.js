@@ -126,3 +126,48 @@ var  templates = {
         moveHandle
         ]
 };
+
+var functions = {
+  "dodawanie" : function(args) {
+    var result = 0;
+    for(var i = 0; i < args.length; i++) {
+      result += args[i];
+    }
+    return result;
+  },
+  "odejmowanie" : function(args) {
+  },
+  "mnozenie" : function(args) {
+  },
+  "dzielenie" : function(args) {
+  },
+  "negacja" : function(args) {
+  },
+  "potegowanie" : function(args) {
+  },
+  "pierwiastkowanie" : function(args) {
+  },
+  "logarytm" : function(args) {
+  },
+  "silnia" : function(args) {
+  },
+  "modulo" : function(args) {
+  },
+  "sinus" : function(args) {
+  },
+  "cosinus" : function(args) {
+  },
+  "tangens" : function(args) {
+  },
+  "cotangens" : function(args) {
+  },
+  "secans" : function(args) {
+  },
+  "cosecans" : function(args) {
+  },
+  "stala_pi" : function(args) {
+  },
+  "stala_epsilon" : function(args) {
+
+  }
+};

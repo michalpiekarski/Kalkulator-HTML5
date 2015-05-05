@@ -355,34 +355,6 @@
       }
     }
 
-    function licz() {
-        var X = 0;
-        var Y = 0;
-        var typ;
-        var tab = document.getElementsByTagName("input");
-        var wynik = 0;
-        switch (typ) {
-            case 'Dodawanie':
-                wynik = X + Y;
-                break;
-            case 'Odejmowanie':
-                wynik = X - Y;
-                break;
-            case 'Mnożenie':
-                wynik = X * Y;
-                break;
-            case 'Dzielenie':
-                wynik = X / Y;
-                break;
-            case 'Negacja':
-                wynik *= -1;
-                break;
-            default:
-                wynik = 0;
-        }
-    }
-
-
     var numberOfPlacedNodes = 0;
     var cursorPos = {
         x: 0,
@@ -427,4 +399,47 @@
         var eog = document.getElementById("end-of-graph");
         eog.style.right = (-xEx.value).toString() + "px";
         eog.style.bottom = (-yEx.value).toString() + "px";
+    }
+
+    function CalculateEquation() {
+      var firstNode = document.getElementById('result-node');
+      var firstPin = firstNode.getElementsByClassName('input-pin')[0];
+      var connectedPin = getConnectedPin(firstPin);
+      alert(CalculateNode(connectedPin));
+    }
+
+    function getConnectedPin(pin) {
+      console.info(pin);
+      var node = pin.dataset.connection;
+      if(node === undefined) {
+        var returnValue = pin.nextElementSibling;
+        returnValue = returnValue.getElementsByTagName('input')[0];
+        return parseFloat(returnValue.value);
+      }
+      node = document.getElementById(node);
+      if(pin.id === node.dataset.startPin) {
+        node = node.dataset.endPin;
+      } else {
+        node = node.dataset.startPin;
+      }
+      node = document.getElementById(node);
+      return node.parentElement;
+    }
+
+    function CalculateNode(node) {
+      var funkcja = functions[node.dataset.template];
+      var args = [];
+      var inputPins = node.getElementsByClassName('input-pin');
+      var inputPinsNum = inputPins.length;
+      if(inputPinsNum > 0) {
+        for(var i = 0; i < inputPinsNum; i++) {
+          var arg = getConnectedPin(inputPins[i]);
+          if(isNaN(arg)) {
+            args.push(CalculateNode(arg));
+          } else {
+            args.push(arg);
+          }
+        }
+      }
+      return funkcja(args);
     }
