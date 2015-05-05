@@ -136,38 +136,79 @@ var functions = {
     return result;
   },
   "odejmowanie" : function(args) {
+    var result = args[0];
+    for (var i = 1; i < args.length; i++) {
+      result-=args[i];
+    }
+    return result;
   },
   "mnozenie" : function(args) {
+    var result = 1;
+    for (var i = 0; i < args.length; i++) {
+      result*=args[i];
+    }
+    return result;
   },
   "dzielenie" : function(args) {
+    var result = args[0];
+    for (var i = 1; i < args.length; i++) {
+      result /=args[i];
+    }
+    return result;
   },
   "negacja" : function(args) {
+    return -args[0];
   },
   "potegowanie" : function(args) {
+    var result = 1;
+    for (var i = 0; i < args[1]; i++) {
+      result *= args[0];
+    }
+    return result;
   },
   "pierwiastkowanie" : function(args) {
+    if(args[0]>=0) {
+      return Math.sqrt(args[0]);
+    } else {
+      return 0;
+    }
   },
   "logarytm" : function(args) {
+    return Math.log(args[0]);
   },
   "silnia" : function(args) {
+    result = args[0];
+    var sign = args[0] < 0 ? -1 : 1;
+    for (var i = Math.abs(args[0])-1; i > 0; i--) {
+      result*=i*sign;
+    }
+    return result;
   },
   "modulo" : function(args) {
+    return args[0]%args[1];
   },
   "sinus" : function(args) {
+    return Math.sin(args[0]);
   },
   "cosinus" : function(args) {
+    return Math.cos(args[0]);
   },
   "tangens" : function(args) {
+    return Math.tan(args[0]);
   },
   "cotangens" : function(args) {
+    return Math.ctg(args[0]);
   },
   "secans" : function(args) {
+    return this.cosinus(args)/1;
   },
   "cosecans" : function(args) {
+    return this.sinus(args)/1;
   },
   "stala_pi" : function(args) {
+    return Math.PI;
   },
   "stala_epsilon" : function(args) {
-
+    return Math.E;
   }
 };
