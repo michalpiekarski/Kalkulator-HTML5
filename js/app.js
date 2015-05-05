@@ -27,15 +27,15 @@
 
     var Connecting = false;
     var ConnectionSettings = {
-        "StartPin": null,
-        "EndPin": null
+        "startPin": null,
+        "endPin": null
     };
     var ConnectionNum = 0;
     var PinNum = 0;
 
     function CreateConnection(connection) {
-        var start_pos = getPosition(document.getElementById(connection.dataset.StartPin));
-        var end_pos = getPosition(document.getElementById(connection.dataset.EndPin));
+        var start_pos = getPosition(document.getElementById(connection.dataset.startPin));
+        var end_pos = getPosition(document.getElementById(connection.dataset.endPin));
         var width = Math.max(1,Math.abs(end_pos.x - start_pos.x));
         var height = Math.max(1,Math.abs(end_pos.y - start_pos.y));
         var top = Math.min(start_pos.y, end_pos.y) + 5;
@@ -75,7 +75,7 @@
         event.preventDefault();
         if(checkIfIsPin(event.currentTarget)) {
           if (checkIfPinNotConnected(event.currentTarget)) {
-              if (Connecting && checkMatchingPinTypes(event.currentTarget, ConnectionSettings.StartPin) && checkPinParents(event.currentTarget, ConnectionSettings.StartPin)) {
+              if (Connecting && checkMatchingPinTypes(event.currentTarget, ConnectionSettings.startPin) && checkPinParents(event.currentTarget, ConnectionSettings.startPin)) {
                   endConnection(event.currentTarget, false);
               } else if (!Connecting) {
                   startConnection(event.currentTarget, false);
@@ -98,7 +98,7 @@
         pin.id = "Pin" + PinNum.toString();
         PinNum++;
       }
-      ConnectionSettings.StartPin = pin;
+      ConnectionSettings.startPin = pin;
     }
 
     function endConnection(pin, keepID) {
@@ -114,18 +114,18 @@
       }
       ConnectionNum++;
 
-      ConnectionSettings.EndPin = pin;
-      ConnectionNode.dataset.StartPin = ConnectionSettings.StartPin.id;
-      ConnectionNode.dataset.EndPin = ConnectionSettings.EndPin.id;
+      ConnectionSettings.endPin = pin;
+      ConnectionNode.dataset.startPin = ConnectionSettings.startPin.id;
+      ConnectionNode.dataset.endPin = ConnectionSettings.endPin.id;
 
-      var sp = document.getElementById(ConnectionSettings.StartPin.id);
+      var sp = document.getElementById(ConnectionSettings.startPin.id);
       console.log(sp.dataset.connection);
       if(sp.dataset.connection === undefined) {
         sp.dataset.connection = ConnectionNode.id;
       } else {
         sp.dataset.connection += "&" + ConnectionNode.id;
       }
-      var ep = document.getElementById(ConnectionSettings.EndPin.id);
+      var ep = document.getElementById(ConnectionSettings.endPin.id);
       if(ep.dataset.connection === undefined) {
         ep.dataset.connection = ConnectionNode.id;
       } else {
@@ -138,8 +138,8 @@
       Graph.appendChild(ConnectionNode);
 
       ConnectionSettings = {
-          "StartPin": null,
-          "EndPin": null
+          "startPin": null,
+          "endPin": null
       };
     }
 
@@ -277,6 +277,7 @@
             for (var i = index; i < nodesNum - 1; i++)
                 allnodes[i].id = "node" + i;
         }
+        fixConnectedPins();
     }
 
     function deleteNodeConnections(node) {
@@ -290,10 +291,10 @@
             for(var j = 0; j < pinConnections.length; j++) {
               var pinConnection = document.getElementById(pinConnections[j]);
               var otherPin;
-              if(pins[i].id === pinConnection.dataset.StartPin) {
-                otherPin = document.getElementById(pinConnection.dataset.EndPin);
-              } else if (pins[i].id === pinConnection.dataset.EndPin) {
-                otherPin = document.getElementById(pinConnection.dataset.StartPin);
+              if(pins[i].id === pinConnection.dataset.startPin) {
+                otherPin = document.getElementById(pinConnection.dataset.endPin);
+              } else if (pins[i].id === pinConnection.dataset.endPin) {
+                otherPin = document.getElementById(pinConnection.dataset.startPin);
               }
               if(otherPin.dataset.connection === pinConnection.id) {
                 otherPin.removeAttribute('data-connection');
@@ -314,6 +315,43 @@
             }
           }
         }
+      }
+    }
+
+    function fixConnectedPins() {
+      var graph = document.getElementById("main-graph");
+      var cpins = graph.getElementsByClassName('output-pin');
+      var cpinsNum = cpins.length;
+      if(cpinsNum > 0) {
+        var pnum = 0;
+        for(var i = 0; i < cpinsNum; i++) {
+          if(cpins[i].hasAttribute("id")) {
+            var pinConnections = cpins[i].dataset.connection.split('&');
+            var pinConnectionsNum = pinConnections.length;
+            if(pinConnectionsNum > 0) {
+              for(var j = 0; j < pinConnectionsNum; j++) {
+                if(pinConnections[j].dataset.startPin === cpins[i].id) {
+                  cpins[i].id = "Pin" + pnum.toString();
+                  pnum++;
+                  pinConnections[j].dataset.startPin = cpins[i].id;
+                  var otherPin = document.getElementById(pinConnections[j].dataset.endPin);
+                  otherPin.id = "Pin" + pnum.toString();
+                  pnum++;
+                  pinConnections[j].dataset.endPin = otherPin.id;
+                } else {
+                  cpins[i].id = "Pin" + pnum.toString();
+                  pnum++;
+                  pinConnections[j].dataset.endPin = cpins[i].id;
+                  var otherPin = document.getElementById(pinConnections[j].dataset.startPin);
+                  otherPin.id = "Pin" + pnum.toString();
+                  pnum++;
+                  pinConnections[j].dataset.startPin = otherPin.id;
+                }
+              }
+            }
+          }
+        }
+        PinNum = pnum;
       }
     }
 
