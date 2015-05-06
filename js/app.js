@@ -405,7 +405,7 @@
       var firstNode = document.getElementById('result-node');
       var firstPin = firstNode.getElementsByClassName('input-pin')[0];
       var connectedPin = getConnectedPin(firstPin);
-      alert(CalculateNode(connectedPin));
+      alert("WYNIK TO: " + CalculateNode(connectedPin));
     }
 
     function getConnectedPin(pin) {

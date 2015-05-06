@@ -177,7 +177,7 @@ var functions = {
     return Math.log(args[0]);
   },
   "silnia" : function(args) {
-    result = args[0];
+    var result = args[0];
     var sign = args[0] < 0 ? -1 : 1;
     for (var i = Math.abs(args[0])-1; i > 0; i--) {
       result*=i*sign;
@@ -200,10 +200,10 @@ var functions = {
     return Math.ctg(args[0]);
   },
   "secans" : function(args) {
-    return this.cosinus(args)/1;
+    return 1/this.cosinus(args);
   },
   "cosecans" : function(args) {
-    return this.sinus(args)/1;
+    return 1/this.sinus(args);
   },
   "stala_pi" : function(args) {
     return Math.PI;
