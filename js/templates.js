@@ -1,7 +1,7 @@
 var inputPin = "<a href='#' class='pin input-pin' onClick='ConnectionClick(event)'></a>";
 var outputPin = "<a href='#' class='pin output-pin' onClick='ConnectionClick(event)'></a>";
-var inputNumberXWithLabel = "<label>X <input type='number' /></label>";
-var inputNumberYWithLabel = "<label>Y <input type='number' /></label>";
+var inputNumberXWithLabel = "<label>X <input type='number' value='0' /></label>";
+var inputNumberYWithLabel = "<label>Y <input type='number' value='0' /></label>";
 var closeButton = "<a href='#' class='close-button' onClick='deleteNode(this.parentElement)'>X</a>";
 var moveHandle = "<a href='#' class='drag-handle'>@</a>";
 var createContainer = function(elements) {
