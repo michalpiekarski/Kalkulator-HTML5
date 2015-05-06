@@ -369,6 +369,11 @@ text-decoration: none;
     display:block;
 }
 
+.toolbox-tool[data-template="zmienna"]
+{
+    background-image: url("../img/const.png");
+
+}
 .toolbox-tool[data-template="dodawanie"]
 {
     background-image: url("../img/add.png");

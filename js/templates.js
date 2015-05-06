@@ -124,7 +124,13 @@ var  templates = {
         closeButton,
         outputPin,
         moveHandle
-        ]
+        ],
+    "zmienna" : [
+        closeButton,
+        createContainer([inputPin, inputNumberXWithLabel]),
+        outputPin,
+        moveHandle
+    ]
 };
 
 var functions = {
@@ -210,5 +216,8 @@ var functions = {
   },
   "stala_epsilon" : function(args) {
     return Math.E;
+  },
+  "zmienna" : function(args) {
+    return args[0];
   }
 };
