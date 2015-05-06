@@ -69,7 +69,9 @@ text-decoration: none;
     position: relative;
     top: 0;
     left: 0;
-    background: -webkit-radial-gradient(center, ellipse cover, #c3c3c3 0%,#717171 100%);;
+    background: -moz-radial-gradient(center, ellipse cover, #c3c3c3 0%,#717171 100%);
+    background: -webkit-radial-gradient(center, ellipse cover, #c3c3c3 0%,#717171 100%);
+    background: radial-gradient(center, ellipse cover, #c3c3c3 0%,#717171 100%);
     color: white;
     overflow: auto;
 }
@@ -153,6 +155,10 @@ text-decoration: none;
 .input-pin {
     position: relative;
     left: -15px;
+}
+
+.input-pin[data-connection] + label input {
+    visibility: hidden;
 }
 
 .output-pin {
